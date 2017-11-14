@@ -15,7 +15,7 @@ class Provider extends ServiceProvider
 	public function boot()
 	{
 		$this->publishes([
-			__DIR__ . '/../config/authentication.php' => config_path('microservices/authentication.php'),
+			__DIR__ . '/../config/microservices/authentication.php' => config_path('microservices/authentication.php'),
 		], 'config');
 
 		// Laravel auth
@@ -50,7 +50,7 @@ class Provider extends ServiceProvider
 
 	public function register()
 	{
-		$this->mergeConfigFrom(__DIR__ . '/../config/authentication.php', 'authentication');
+		$this->mergeConfigFrom(__DIR__ . '/../config/microservices/authentication.php', 'microservices.authentication');
 
 		$this->app->singleton(AuthUserProvider::class, function () {
 			return new AuthUserProvider();
