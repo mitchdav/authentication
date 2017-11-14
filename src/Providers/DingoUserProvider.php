@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Auth;
+namespace Mitchdav\Authentication\Providers;
 
 use Dingo\Api\Contract\Auth\Provider as DingoProvider;
 use Dingo\Api\Routing\Route;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Auth;
+namespace Mitchdav\Authentication\Providers;
 
 use Illuminate\Http\Request;
 

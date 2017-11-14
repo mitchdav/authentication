@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Auth;
+namespace Mitchdav\Authentication;
 
 class User
 {

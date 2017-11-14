@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Auth;
+namespace Mitchdav\Authentication\Providers;
 
 use Jose\Loader;
+use Mitchdav\Authentication\User;
 
 class UserProvider
 {
