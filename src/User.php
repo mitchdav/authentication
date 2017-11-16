@@ -20,9 +20,9 @@ class User implements \JsonSerializable
 	private $id;
 
 	/**
-	 * @var string $username
+	 * @var string $tenant
 	 */
-	private $username;
+	private $tenant;
 
 	/**
 	 * @return string
@@ -87,19 +87,19 @@ class User implements \JsonSerializable
 	/**
 	 * @return string
 	 */
-	public function getUsername()
+	public function getTenant()
 	{
-		return $this->username;
+		return $this->tenant;
 	}
 
 	/**
-	 * @param string $username
+	 * @param string $tenant
 	 *
 	 * @return User
 	 */
-	public function setUsername($username)
+	public function setTenant($tenant)
 	{
-		$this->username = $username;
+		$this->tenant = $tenant;
 
 		return $this;
 	}
