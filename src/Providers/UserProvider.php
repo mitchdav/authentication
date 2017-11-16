@@ -4,9 +4,7 @@ namespace Mitchdav\Authentication\Providers;
 
 use Jose\Factory\CheckerManagerFactory;
 use Jose\Factory\JWKFactory;
-use Jose\JWTLoader;
 use Jose\Loader;
-use Jose\Verifier;
 use Mitchdav\Authentication\Checkers\IssuerChecker;
 use Mitchdav\Authentication\User;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -19,6 +17,10 @@ class UserProvider
 		$key     = config('microservices.authentication.key');
 		$issuers = config('microservices.authentication.issuers');
 
+		$algs = [
+			$alg,
+		];
+
 		$checkerManager = CheckerManagerFactory::createClaimCheckerManager([
 			'exp',
 			'iat',
@@ -26,21 +28,17 @@ class UserProvider
 			new IssuerChecker($issuers),
 		]);
 
-		$verifier = Verifier::createVerifier([
-			$alg,
-		]);
-
 		$jwk = JWKFactory::createFromValues([
 			'kty' => 'oct',
 			'k'   => $key,
 		]);
 
-		$jws = (new Loader())->load($token);
-
-		$jwtLoader = new JWTLoader($checkerManager, $verifier);
+		$loader = new Loader();
 
 		try {
-			$jwtLoader->verify($jws, $jwk);
+			$jws = $loader->loadAndVerifySignatureUsingKey($token, $jwk, $algs, $signatureIndex);
+
+			$checkerManager->checkJWS($jws, $signatureIndex);
 		} catch (\Exception $exception) {
 			throw new HttpException(401, $exception->getMessage());
 		}

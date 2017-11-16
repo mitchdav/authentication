@@ -25,7 +25,7 @@ class IssuerChecker extends BaseIssuerChecker
 		$found = FALSE;
 
 		foreach ($this->allowedIssuers as $allowedIssuer) {
-			if (starts_with($allowedIssuer, $issuer)) {
+			if (starts_with($issuer, $allowedIssuer)) {
 				$found = TRUE;
 
 				break;
