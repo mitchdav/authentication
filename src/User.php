@@ -2,7 +2,7 @@
 
 namespace Mitchdav\Authentication;
 
-class User implements \JsonSerializable, \ArrayAccess
+class User implements \JsonSerializable
 {
 	/**
 	 * @var string $token
