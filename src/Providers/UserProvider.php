@@ -6,6 +6,7 @@ use Jose\Factory\CheckerManagerFactory;
 use Jose\Loader;
 use Mitchdav\Authentication\Checkers\IssuerChecker;
 use Mitchdav\Authentication\User;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserProvider
 {
@@ -20,7 +21,11 @@ class UserProvider
 
 		$jws = (new Loader())->load($token);
 
-		$checkerManager->checkJWS($jws, 0);
+		try {
+			$checkerManager->checkJWS($jws, 0);
+		} catch (\Exception $exception) {
+			throw new HttpException(401, $exception->getMessage());
+		}
 
 		$user = new User();
 
