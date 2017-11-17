@@ -2,8 +2,13 @@
 
 namespace Mitchdav\Authentication;
 
-class User implements \JsonSerializable
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+
+class User implements \JsonSerializable, AuthorizableContract
 {
+	use Authorizable;
+
 	/**
 	 * @var string $token
 	 */
